@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "chrome-launcher": "^0.15.1",
+    "cron": "^2.1.0",
     "lighthouse": "^9.6.6",
     "puppeteer": "^16.2.0"
   }
