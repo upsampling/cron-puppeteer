@@ -1,6 +1,6 @@
-const lhDesktopConfig = require('lighthouse/lighthouse-core/config/lr-desktop-config.js');
+// const lhDesktopConfig = require('lighthouse/lighthouse-core/config/lr-desktop-config.js');
 
-module.exports = {
+export default {
     extends: 'lighthouse:default',
     // settings: {
     //   onlyCategories: ['performance', 'accessibility', 'best-practices'],
