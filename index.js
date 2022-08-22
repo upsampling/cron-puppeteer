@@ -1,17 +1,19 @@
+import lighthouse from "lighthouse"; // This should be at the top of the file
+import puppeteer from "puppeteer";
+import customConfig from './custom-config';
+export function createBrowser() {
+    return puppeteer.launch({
+        args: ["--show-paint-rects"] // Required by lighthouse
+    });
+}
 
-const fs = require('fs');
-const lighthouse = require('lighthouse');
-const chromeLauncher = require('chrome-launcher');
-const config = require('./custom-config');
-
-(async () => {
-    const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
-
-    let runnerResult = await lighthouse('https://www.calvinklein.mx', {   port: chrome.port, output: 'html' }, config );
-    fs.writeFileSync('Calvin_Klein-Report.html', runnerResult.report);
-
-    runnerResult = await lighthouse('https://www.rapsodia.com.mx', {   port: chrome.port, output: 'html' }, config );
-    fs.writeFileSync('Rapsodia-Report.html', runnerResult.report);
-
-    await chrome.kill();
-})();
+export function createReportWithBrowser(browser, url, options = { output: "html" }) {
+  const endpoint = browser.wsEndpoint(); // Allows us to talk via DevTools protocol
+  const endpointURL = new URL(endpoint); // Lighthouse only cares about the port, so we have to parse the URL so we can grab the port to talk to Chrome on
+  return lighthouse(
+    url,
+    Object.assign({}, {
+      port: endpointURL.port
+    }, customConfig) // Allow options to override anything here
+  );
+}
