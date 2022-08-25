@@ -13,7 +13,7 @@ const getDate = ()=>{
 
 //cron que se ejecuta cada 5 min
 const job = new CronJob(
-	'*/5 * * * *',
+	'0 */2 * * *',
 	async function() {
     console.log('Cron Start at: ', getDate());
     const browser = await createBrowser()
