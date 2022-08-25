@@ -4,7 +4,7 @@ import { customConfig } from "./custom-config.js";
 
 export function createBrowser() {
     return puppeteer.launch({
-        args: ["--show-paint-rects"] // Required by lighthouse
+        args: ["--no-sandbox", "--disable-setuid-sandbox", "--show-paint-rects"] // Required by lighthouse
     });
 }
 
