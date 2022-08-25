@@ -19,11 +19,9 @@ const job = new CronJob(
     const browser = await createBrowser()
   
     const resultRapsodia = await createReportWithBrowser( browser, "https://www.rapsodia.com.mx" );
-    // fs.writeFileSync("./reports/rapsodia/rapsodia.json", resultRapsodia.report, "utf-8");
-    const { categories } = resultRapsodia.report;
-    console.log('categories: ', categories);
-    // result = await createReportWithBrowser( browser, "https://www.calvinklein.mx" );  
-    // fs.writeFileSync("./reports/calvinklein/ck.json", result.report, "utf-8");
+    const jsonResponse = JSON.parse(resultRapsodia.report);
+    const { categories: {performance} } = jsonResponse;
+    console.log('categories: ', performance);
     
     await browser.close();
     console.log('Cron Finish at: ', getDate())
@@ -40,12 +38,16 @@ job.start()
   
 //   const browser = await createBrowser();
   
-//   const resultRapsodia = await createReportWithBrowser( browser, "https://www.rapsodia.com.mx" );
-//   fs.writeFileSync(`./reports/[RAPSODIA].html`, resultRapsodia.report, "utf-8");
+//   // const resultRapsodia = await createReportWithBrowser( browser, "https://www.rapsodia.com.mx" );
+//   // fs.writeFileSync(`./reports/[RAPSODIA].html`, resultRapsodia.report, "utf-8");
 
-//   const resultCalvinKlein = await createReportWithBrowser( browser, "https://www.calvinklein.mx" );
-//   fs.writeFileSync("./reports/[CALVIN KLEIN].html", resultCalvinKlein.report, "utf-8");
-  
+//   // const resultCalvinKlein = await createReportWithBrowser( browser, "https://www.calvinklein.mx" );
+//   // fs.writeFileSync("./reports/[CALVIN KLEIN].html", resultCalvinKlein.report, "utf-8");
+//   const resultRapsodia = await createReportWithBrowser( browser, "https://www.rapsodia.com.mx" );
+//   const jsonResponse = JSON.parse(resultRapsodia.report);
+//   const { categories: {performance} } = jsonResponse;
+//   console.log('categories: ', performance);
+
 // await browser.close();})
 // ()
 // .catch(console.error)
