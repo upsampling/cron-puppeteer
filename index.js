@@ -20,8 +20,8 @@ const job = new CronJob(
   
     const resultRapsodia = await createReportWithBrowser( browser, "https://www.rapsodia.com.mx" );
     const jsonResponse = JSON.parse(resultRapsodia.report);
-    const { categories: {performance} } = jsonResponse;
-    console.log('categories: ', performance);
+    const { categories: {performance: {id, score}} } = jsonResponse;
+    console.log({id, score});
     
     await browser.close();
     console.log('Cron Finish at: ', getDate())
