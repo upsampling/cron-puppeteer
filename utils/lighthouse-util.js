@@ -13,6 +13,6 @@ export function createReportWithBrowser(browser, url) {
   const endpoint = browser.wsEndpoint();
   const endpointURL = new URL(endpoint);
 
-  return lighthouse( url, { port: endpointURL.port, output: "json", }, customConfig );
+  return lighthouse( url, { port: endpointURL.port, output: "html", }, customConfig );
 
 }
